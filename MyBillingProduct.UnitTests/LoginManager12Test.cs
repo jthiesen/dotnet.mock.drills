@@ -43,27 +43,27 @@ namespace MyBillingProduct.UnitTests
             StringAssert.Contains(webservice.GetLastLog(), $"got exception - [message]");
         }
 
-        [TestCase("a", "pass")]
-        public void AddUser_IfLoggerThrowsException_NotifyWebService(string user, string pass) 
-        {
-            var log = new FakeLogger();
-            log.simulateException = true;
-            var webservice = new FakeWebService();
-            LoginManager1 lm = new LoginManager1(log, webservice);
-            lm.AddUser(user, pass);
-            StringAssert.Contains($"got exception - [message]",webservice.GetLastLog());
-        }
-
-        [TestCase("a", "password")]
-        [TestCase("b", "password")]
-        public void AddUser_WhenCalled_ShouldLog(string user, string pass)
-        {
-            var log = new FakeLogger();
-            var webservice = new FakeWebService();
-            LoginManager1 lm = new LoginManager1(log, webservice);
-            lm.AddUser(user, pass);
-            Assert.That(log.GetLastLog().Equals($"user added: [{user}],[{pass}]"));
-        }
+        // [TestCase("a", "pass")]
+        // public void AddUser_IfLoggerThrowsException_NotifyWebService(string user, string pass) 
+        // {
+        //     var log = new FakeLogger();
+        //     log.simulateException = true;
+        //     var webservice = new FakeWebService();
+        //     LoginManager1 lm = new LoginManager1(log, webservice);
+        //     lm.AddUser(user, pass);
+        //     StringAssert.Contains($"got exception - [message]",webservice.GetLastLog());
+        // }
+        //
+        // [TestCase("a", "password")]
+        // [TestCase("b", "password")]
+        // public void AddUser_WhenCalled_ShouldLog(string user, string pass)
+        // {
+        //     var log = new FakeLogger();
+        //     var webservice = new FakeWebService();
+        //     LoginManager1 lm = new LoginManager1(log, webservice);
+        //     lm.AddUser(user, pass);
+        //     Assert.That(log.GetLastLog().Equals($"user added: [{user}],[{pass}]"));
+        // }
 
     }
 

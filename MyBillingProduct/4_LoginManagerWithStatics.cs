@@ -10,13 +10,11 @@ namespace MyBillingProduct
 
 	    public bool IsLoginOK(string user, string password)
 	    {
-	        try
-	        {
-	           StaticLogger.Write("blah");
+	        try {
+		        LoggerWrite("user [username] logged in ok");
 	        }
-	        catch (LoggerException e)
-	        {
-	            StaticWebService.Write(e.Message + Environment.MachineName);
+	        catch (LoggerException e) {
+		        WebServiceWrite(e.Message + GetMachineName());
 	        }
 	        if (m_users[user] != null &&
 	            (string) m_users[user] == password)
@@ -26,6 +24,17 @@ namespace MyBillingProduct
 	        return false;
 	    }
 
+	    protected virtual string GetMachineName() {
+		    return Environment.MachineName;
+	    }
+
+	    protected virtual void WebServiceWrite(string message) {
+		    StaticWebService.Write(message);
+	    }
+
+	    protected virtual void LoggerWrite(string message) {
+		    StaticLogger.Write(message);
+	    }
 
 	    public void AddUser(string user, string password)
 	    {
